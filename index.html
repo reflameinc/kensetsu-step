@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>30秒で無料キャリア相談 | REFLAME 転職支援</title>
+<meta name="description" content="20代の転職を専任キャリアアドバイザーが無料でサポート。かんたん30秒の質問に答えるだけで、無料キャリア相談に申し込めます。">
+
+<!-- Google Tag Manager（中途LPと同一コンテナ） -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5KH7WRCP');</script>
+<!-- End Google Tag Manager -->
+
+<style>
+  :root{
+    /* 中途事業部カラー（135deg対角グラデが正・単色潰し禁止） */
+    --grad-mid: linear-gradient(135deg,#4FC3F7 0%,#1565C0 100%);
+    --grad-cta: linear-gradient(90deg,#12A9EF,#1A409A);   /* 既存中途LPのCTAと統一 */
+    --blue-main:#1565C0;
+    --blue-sky:#12A9EF;
+    --ink:#1c2b3a;
+    --page-bg:#e9f1f8;      /* カラム外（PC）の背景 */
+    --col-bg:#f7fbfe;       /* カラム内の背景 */
+    /* 黒枠スタイル（マイナビジョブ20's参考）: 2px黒ボーダー＋ぼかし無しのハードシャドウ */
+    --frame: 2px solid #000;
+    --hard-shadow: 2px 2px 0 1px #000;
+    --hard-shadow-lg: 3px 3px 0 1px #000;
+    --card-shadow: var(--hard-shadow);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    font-family:-apple-system,"system-ui","Segoe UI","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;
+    background:var(--page-bg);
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.6;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  /* ── 縦1カラム（スマホ幅固定・PCでは中央寄せ）──
+     ※ Zキャリア型の骨格。中央寄せは margin-inline:auto + max-width で行う */
+  .col{
+    max-width:470px;
+    margin-inline:auto;
+    min-height:100vh;
+    background:var(--col-bg);
+    box-shadow:0 0 40px rgba(21,101,192,.08);
+    display:flex;
+    flex-direction:column;
+  }
+  /* flex column の子は stretch で幅を揃える（width:100%＋左右marginは右はみ出しになるため禁止） */
+  .col > *{ align-self:stretch; }
+
+  /* ── FV ──（2026-09-30 写真FVへ改修＝ヘッダー独立＋写真の上に黒枠コピー。本人選定のモック案「A＋ヘッダー独立」）
+     旧イラスト版は _archive/step_イラストFV版_2026-09-30/ ・比較モックは _wip_fv写真案_2026-09-30/ */
+  .fv{ position:relative; background:#fff; }
+  /* ヘッダー（写真の外に独立）: ロゴ＋タグライン。間に斜めの青い帯 */
+  .fv-bar{
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:9px 14px; background:#fff;
+  }
+  .fv-bar::before{
+    content:""; position:absolute; top:0; bottom:0; left:40%; width:48px;
+    background:linear-gradient(135deg,rgba(79,195,247,.32),rgba(21,101,192,.22));
+    transform:skewX(-32deg);
+  }
+  .fv-bar-logo{ position:relative; height:20px; width:auto; flex:none; }
+  /* タグラインの文言は meta description の既存表記から取った（新規の主張は足していない） */
+  .fv-bar-tagline{
+    position:relative;
+    font-size:14px; font-weight:700; line-height:1.4; letter-spacing:.01em;
+    padding-left:9px; border-left:3px solid var(--blue-sky);
+  }
+  /* 350px以下はタグラインが3行に割れる（320pxで「ート」だけ落ちた）ので、文字は14pxのままロゴ側を縮める */
+  @media (max-width:350px){
+    .fv-bar{ padding:9px 10px; gap:8px; }
+    .fv-bar-logo{ height:16px; }
+  }
+  /* 写真: 110%に拡大して左上基準で置く＝右端の無地の窓と下端の机を削り、左にコピーの余白を作る。
+     高さはヘッダーのぶん旧版 min(92vw,430px) より短くし、フォーム位置の後退を抑える */
+  .fv-photo{ position:relative; overflow:hidden; height:min(85vw, 400px); background:#eaf3f8; }
+  .fv-photo img{ position:absolute; top:0; left:0; width:110%; max-width:none; height:auto; }
+  /* 写真左上の斜めリボン */
+  .fv-ribbon{
+    position:absolute; top:0; left:26px; width:64px; height:46%; z-index:1;
+    background:linear-gradient(180deg,rgba(79,195,247,.5),rgba(79,195,247,0));
+    transform:skewX(-34deg); transform-origin:top left;
+  }
+  /* 写真の下端を斜めに切る（Zキャリア型の斜めエッジ） */
+  .fv-photo::after{
+    content:""; position:absolute; left:0; right:0; bottom:-1px; height:12%; z-index:1;
+    background:var(--col-bg);
+    clip-path:polygon(0 100%, 100% 0, 100% 100%, 0 100%);
+  }
+  /* コピー: 写真左上の明るい部分に黒枠ボックスを1行1箱で積む。
+     左の空きは写真幅の約半分＝既定サイズで1行6字まで。7〜8字の行があるコピーは .is-long で字を小さくする
+     （FV_VARIANTS の cls:'is-long'）。9字以上は顔にかかるので改行で割る */
+  .fv-copy{ position:absolute; z-index:2; left:12px; top:30px; }
+  .fv-title{
+    display:table;
+    margin:0 0 6px;
+    background:#fff;
+    border:var(--frame);
+    border-radius:4px;
+    padding:6px 12px 4px;
+    font-size:clamp(20px,6.6vw,31px);
+    font-weight:900;
+    line-height:1.35;
+    letter-spacing:.02em;
+    box-shadow:var(--hard-shadow-lg);
+  }
+  .fv-copy.is-long .fv-title{ font-size:clamp(16px,5vw,23px); }
+  .fv-title .grad{
+    background:var(--grad-mid);
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+  }
+  .fv-tags{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin:14px 16px 0;
+  }
+  .fv-tag{
+    background:#fff;
+    border:var(--frame);
+    border-radius:6px;
+    padding:5px 10px;
+    font-size:14px; font-weight:700;   /* 13→14px（スマホ最低14pxルール・2026-09-30） */
+    box-shadow:var(--hard-shadow);
+  }
+  .fv-tag .hash{ color:var(--blue-sky); font-weight:900; margin-right:2px; }
+  .fv-tag .em{ color:var(--blue-main); }
+
+  /* ── 30秒リボン ── */
+  .sec30{
+    text-align:center;
+    margin:26px 16px 0;
+    font-weight:900;
+    letter-spacing:.05em;
+  }
+  .sec30 .small{ font-size:15px; }
+  .sec30 .big{
+    font-size:34px;
+    background:var(--grad-mid);
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+    padding:0 2px;
+  }
+
+  /* ── フォームカード ── */
+  .form-wrap{ margin:10px 16px 0; }
+  .pbar{
+    display:flex; align-items:center; gap:10px;
+    margin:8px 2px 14px;
+  }
+  /* .pbar の display:flex が hidden 属性に勝ち、送信後も「4/4」が残っていた（2026-09-29 発見・旧版からの不具合） */
+  .pbar[hidden]{ display:none; }
+  .pbar-track{
+    flex:1; height:10px; border:var(--frame); border-radius:99px; background:#fff; overflow:hidden;
+  }
+  .pbar-fill{
+    height:100%; width:0%;
+    background:var(--grad-mid);
+    border-radius:99px;
+    transition:width .35s ease;
+  }
+  .pbar-text{ font-size:12px; font-weight:700; color:var(--blue-main); min-width:38px; text-align:right; }
+
+  .q-title{
+    font-size:19px; font-weight:900; line-height:1.5;
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .q-title .hl{
+    background:linear-gradient(transparent 62%, rgba(79,195,247,.45) 62%);
+    padding:0 1px;
+  }
+
+  .opts{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .opts.one-col{ grid-template-columns:1fr; }
+  .opt{
+    background:#fff;
+    border:var(--frame);
+    border-radius:8px;
+    min-height:56px;
+    padding:10px 8px 10px 14px;
+    font-size:15px; font-weight:700; color:var(--ink);
+    text-align:left;
+    box-shadow:var(--hard-shadow);
+    display:flex; align-items:center; gap:8px;
+    transition:box-shadow .15s ease, transform .15s ease, background .15s ease;
+  }
+  .opt .mark{
+    flex:none;
+    width:18px; height:18px; border-radius:50%;
+    border:2px solid #000;
+    display:inline-block;
+    position:relative;
+  }
+  .opt.picked{
+    background:#dff1fd;
+    box-shadow:0 0 0 2px var(--blue-sky) inset, var(--hard-shadow);
+  }
+  .opt:active{ transform:translate(2px,2px); box-shadow:0 0 0 1px #000; }
+  .opt.picked .mark{ border-color:var(--blue-sky); }
+  .opt.picked .mark::after{
+    content:""; position:absolute; inset:3px; border-radius:50%;
+    background:var(--grad-mid);
+  }
+
+  /* 日付グリッド */
+  .date-btn .dnum{ font-weight:900; }
+  .date-btn .dwd{ font-size:12px; color:#6b8299; margin-left:4px; }
+  .span2{ grid-column:1 / -1; justify-content:center; }
+
+  /* テキスト入力ステップ */
+  .field{ margin-bottom:6px; }
+  .field input{
+    width:100%;
+    border:var(--frame);
+    border-radius:8px;
+    background:#fff;
+    font-size:16px;
+    padding:15px 14px;
+    outline:none;
+    box-shadow:var(--hard-shadow);
+    transition:border-color .15s ease;
+  }
+  .field input:focus{ border-color:var(--blue-main); box-shadow:var(--hard-shadow), 0 0 0 3px rgba(18,169,239,.25); }
+  .field select{
+    width:100%;
+    border:var(--frame);
+    border-radius:8px;
+    background:#fff;
+    font-size:16px;
+    padding:15px 14px;
+    box-shadow:var(--hard-shadow);
+    outline:none;
+  }
+  .field select:focus{ border-color:var(--blue-main); box-shadow:var(--hard-shadow), 0 0 0 3px rgba(18,169,239,.25); }
+  .flabel{ font-size:13px; font-weight:800; margin:14px 2px 6px; }
+  /* 生年月日カード（青135degグラデ＋黒枠） */
+  .birth-card{
+    background:var(--grad-mid);
+    border:var(--frame);
+    border-radius:12px;
+    box-shadow:var(--hard-shadow-lg);
+    padding:16px 14px 18px;
+  }
+  .birth-note{ color:#fff; font-weight:800; font-size:13px; margin-bottom:12px; }
+  .birth-row{ display:flex; align-items:center; gap:6px; }
+  .birth-row select{
+    flex:1; min-width:0;
+    border:var(--frame);
+    border-radius:8px;
+    background:#fff;
+    font-size:16px;
+    padding:12px 8px;
+    box-shadow:var(--hard-shadow);
+    outline:none;
+  }
+  .birth-row .unit{ color:#fff; font-weight:800; flex:none; }
+  .field-hint{ font-size:12px; color:#6b8299; margin:8px 2px 0; }
+  .field-err{
+    display:none;
+    font-size:13px; font-weight:700; color:#e53935; margin:8px 2px 0;
+  }
+  .field-err.show{ display:block; }
+
+  /* 次へボタン */
+  .next-btn{
+    width:100%;
+    height:58px;
+    margin-top:18px;
+    border:var(--frame);
+    border-radius:99px;
+    background:var(--grad-cta);
+    color:#fff;
+    font-size:17px; font-weight:800; letter-spacing:.08em;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    box-shadow:var(--hard-shadow-lg);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .next-btn:disabled{
+    background:#c3cfdb; box-shadow:none; cursor:not-allowed;
+    border-color:#8fa1b3; color:#f2f6fa;
+  }
+  .next-btn:not(:disabled):active{ transform:translate(3px,3px); box-shadow:0 0 0 1px #000; }
+  .next-btn .arrow{ font-weight:900; }
+  .back-link{
+    display:block; text-align:center;
+    margin-top:14px;
+    background:none; border:0;
+    font-size:13px; color:#6b8299; text-decoration:underline;
+  }
+  .consent{
+    font-size:11px; color:#6b8299; text-align:center; margin-top:12px;
+  }
+  .consent a{ color:var(--blue-main); }
+
+  /* 完了画面 */
+  .done{ text-align:center; padding:10px 4px; }
+  .done .done-icon{
+    width:64px; height:64px; margin:6px auto 14px;
+    border:var(--frame);
+    border-radius:50%;
+    background:var(--grad-mid);
+    box-shadow:var(--hard-shadow);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .done .done-icon svg{ width:32px; height:32px; stroke:#fff; stroke-width:3; fill:none; }
+  .done h2{ font-size:20px; font-weight:900; margin-bottom:10px; }
+  .done p{ font-size:14px; color:#41566b; }
+
+  /* 完了画面の面談予約ブロック（SFスケジューラー） */
+  .cal-box{
+    margin-top:22px; text-align:left;
+    border:var(--frame); border-radius:8px; overflow:hidden;
+    box-shadow:var(--hard-shadow);
+  }
+  .cal-hd{ background:var(--grad-mid); color:#fff; padding:14px 16px; }
+  .cal-hd .dur{
+    display:inline-block; font-size:14px; font-weight:700;
+    background:rgba(255,255,255,.24); border-radius:999px;
+    padding:2px 12px; margin-bottom:6px;
+  }
+  .cal-hd h3{ margin:0; font-size:16px; font-weight:900; }
+  .cal-body{ padding:16px; background:#fff; }
+  .cal-body p{ font-size:14px; line-height:1.7; color:#41566b; margin:0 0 14px; }
+  .cal-btn{
+    display:block; box-sizing:border-box; width:100%; text-align:center;
+    background:var(--grad-mid); color:#fff; font-size:16px; font-weight:900;
+    text-decoration:none; padding:16px 14px; border-radius:999px;
+    border:var(--frame);
+    position:relative; overflow:hidden; isolation:isolate;
+    /* 黒のハードシャドウ（このLPの様式）は維持し、その外側に青のグローを重ねる */
+    box-shadow:var(--hard-shadow), 0 0 8px 1px rgba(18,169,239,.5);
+    animation:calGlow 2.4s ease-in-out infinite;
+  }
+  .cal-btn:active{ transform:translateY(1px); box-shadow:1px 1px 0 1px #000; animation:none; }
+  /* 表面を走る光沢。テキストの上に乗るので pointer-events は切る */
+  .cal-btn::after{
+    content:''; position:absolute; top:0; bottom:0; left:-60%; width:45%; pointer-events:none;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);
+    transform:skewX(-18deg);
+    animation:calShine 3.2s ease-in-out infinite;
+  }
+  /* 呼吸するグロー。広がり幅は .cal-body の padding(16px) 内に収める
+     （.cal-box が overflow:hidden なので、それを超えると縁で切れる） */
+  @keyframes calGlow{
+    0%,100%{ box-shadow:var(--hard-shadow), 0 0  8px 1px rgba(18,169,239,.5); }
+    50%    { box-shadow:var(--hard-shadow), 0 0 12px 2px rgba(18,169,239,.9); }
+  }
+  @keyframes calShine{
+    0%      { left:-60%; }
+    55%,100%{ left:130%; }
+  }
+  /* 動きを減らす設定の人には光らせない（点滅は負荷になり得るため） */
+  @media (prefers-reduced-motion:reduce){
+    .cal-btn{ animation:none; }
+    .cal-btn::after{ display:none; }
+  }
+  /* `.cal-body p` に詳細度で負けて上マージンが消えるため、body配下として指定する（!important不要） */
+  .cal-body .cal-note{ font-size:14px; color:#41566b; text-align:center; margin:16px 0 0; text-wrap:balance; }
+
+  /* 送信直後の案内＋自前カレンダー（2026-09-28 方式B） */
+  .cal-intro{ text-align:center; padding:6px 4px 0; }
+  .cal-intro .done-icon{
+    width:56px; height:56px; margin:4px auto 12px;
+    border:var(--frame); border-radius:50%;
+    background:var(--grad-mid); box-shadow:var(--hard-shadow);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cal-intro .done-icon svg{ width:28px; height:28px; stroke:#fff; stroke-width:3; fill:none; }
+  .ci-thanks{ font-size:18px; font-weight:900; margin-bottom:6px; }
+  .ci-lead{ font-size:15px; font-weight:700; }
+  .ci-note{ font-size:14px; color:#41566b; margin-top:4px; }
+  .cal-body .cal-load,.cal-body .cal-empty{ font-size:14px; text-align:center; margin:4px 0; }
+  .cal-day + .cal-day{ margin-top:16px; }
+  .cal-body .cd-date{ font-size:15px; font-weight:900; color:var(--ink); margin:0 0 8px; }
+  .cd-slots{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .slot{
+    background:#fff; border:var(--frame); border-radius:8px;
+    min-height:48px; font-size:16px; font-weight:800; color:var(--ink);
+    box-shadow:var(--hard-shadow);
+  }
+  .slot:active{ transform:translate(2px,2px); box-shadow:0 0 0 1px #000; background:#dff1fd; }
+  .cal-confirm{ text-align:center; }
+  .cal-body .cc-q{ font-size:15px; font-weight:700; color:var(--ink); margin:0 0 6px; }
+  .cal-body .cc-dt{ font-size:20px; font-weight:900; color:var(--blue-main); margin:0; }
+  /* 週グリッド（2026-09-29・embed.js の週表示と同じ構成／配色はこのLPの青系）
+     5列（旧7列）。スマホ375px幅でセル約60px・時刻14px */
+  .wk-bar{ display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin:0 0 12px; }
+  .cal-body .wk-ttl{ font-size:15px; font-weight:900; color:var(--ink); margin:0; }
+  .wk-nav{ display:flex; align-items:center; gap:6px; }
+  .wk-btn{
+    width:36px; height:36px; border:1px solid #cfd9e4; border-radius:8px; background:#fff;
+    font-size:18px; font-weight:700; color:#41566b; line-height:1;
+  }
+  .wk-btn:disabled{ opacity:.35; cursor:default; }
+  .wk-lbl{ font-size:14px; color:#6b8299; font-variant-numeric:tabular-nums; min-width:96px; text-align:center; }
+  /* 5列（2026-09-29 7日→5日）。スマホ375px幅でセル約60px */
+  .wk-grid{ display:flex; flex-direction:column; gap:6px; }
+  .wk-row{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px; }
+  .wk-head{ text-align:center; padding:4px 0 8px; border-bottom:2px solid #e3eaf2; margin-bottom:2px; }
+  .wk-day{ display:block; font-size:18px; font-weight:900; color:var(--ink); line-height:1.2; }
+  .wk-dow{ display:block; font-size:14px; color:#6b8299; }
+  .wk-head.sat .wk-dow{ color:#1565C0; } .wk-head.sun .wk-dow{ color:#d84343; }
+  .wk-head.off .wk-day,.wk-head.off .wk-dow{ color:#b9c5d2; }
+  .wk-cell{
+    display:flex; align-items:center; justify-content:center;
+    min-height:44px; padding:0; border-radius:8px;
+    font-size:14px; font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:-.03em; white-space:nowrap;
+  }
+  .wk-cell.open{ background:#fff; border:1.5px solid #8fb8ee; color:#1a47c9; }
+  .wk-cell.open:hover{ background:#eef5ff; }
+  .wk-cell.open:active{ background:#dff1fd; }
+  .wk-cell.closed{ background:#f1f4f8; color:#c3ccd7; border:1.5px solid transparent; }
+  .cal-body .wk-hint{ font-size:14px; color:#6b8299; margin:12px 0 0; }
+  .done .booked-dt{ font-size:18px; font-weight:900; color:var(--blue-main); margin-bottom:10px; }
+
+  /* ── フッター ── */
+  footer{
+    margin-top:36px;
+    background:#243447;
+    color:#b7c4d2;
+    padding:26px 16px 30px;
+    font-size:12px;
+    text-align:center;
+  }
+  footer nav{
+    display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  footer a{ color:#dbe5ee; text-decoration:none; }
+  footer a:hover{ text-decoration:underline; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+  /* ステップ切替の軽いアニメ */
+  @keyframes rise{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:none;} }
+  .step-anim{ animation:rise .45s cubic-bezier(.25,1,.5,1) both; }
+
+  /* ── FVアニメーション（初回ロード時・CSSのみ）──
+     初期状態はkeyframesのfrom＋fill-mode:bothで表現する（要素側にopacity:0を書かない＝
+     prefers-reduced-motionでanimationが無効化されても表示が消えない）。 */
+  @keyframes fvSlideIn{
+    from{ opacity:0; transform:translateX(-24px); }
+    to{ opacity:1; transform:translateX(0); }
+  }
+  @keyframes fvPop{
+    0%{ opacity:0; transform:scale(.5); }
+    70%{ opacity:1; transform:scale(1.08); }
+    100%{ opacity:1; transform:scale(1); }
+  }
+  @keyframes fvDrop{
+    from{ opacity:0; transform:translateY(-16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .fv-bar{ animation:fvDrop .5s cubic-bezier(.25,1,.5,1) both; }
+  /* 写真はアニメさせない（旧イラストの浮遊ループは写真だと端が見える／フェードはLCPを遅らせる） */
+  /* 見出しボックス: 左から順にスライドイン */
+  .fv-title{ animation:fvSlideIn .55s cubic-bezier(.25,1,.5,1) both; }
+  .fv-copy .fv-title:nth-of-type(1){ animation-delay:.25s; }
+  .fv-copy .fv-title:nth-of-type(2){ animation-delay:.45s; }
+  .fv-copy .fv-title:nth-of-type(3){ animation-delay:.65s; }
+  /* #バッジ: 遅れてポップイン（時差） */
+  .fv-tag{ animation:fvPop .45s cubic-bezier(.34,1.56,.64,1) both; }
+  .fv-tags .fv-tag:nth-child(1){ animation-delay:.75s; }
+  .fv-tags .fv-tag:nth-child(2){ animation-delay:.88s; }
+  .fv-tags .fv-tag:nth-child(3){ animation-delay:1.01s; }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KH7WRCP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="col">
+
+  <!-- FV（2026-09-30 写真FVへ改修: ヘッダー独立＋写真の上に黒枠コピー） -->
+  <header class="fv">
+    <div class="fv-bar">
+      <img class="fv-bar-logo" src="assets/reflame-logo.png" alt="REFLAME" width="646" height="122">
+      <p class="fv-bar-tagline">専任アドバイザーが<br>20代の転職を無料でサポート</p>
+    </div>
+    <div class="fv-photo">
+      <img src="assets/fv_photo.webp" alt="スマートフォンを手に笑顔でこちらを見る女性" width="1024" height="1024" fetchpriority="high">
+      <i class="fv-ribbon" aria-hidden="true"></i>
+      <div class="fv-copy" id="fvCopy">
+        <span class="fv-title"><span class="grad">自分らしく</span></span>
+        <span class="fv-title">働ける場所を</span>
+        <span class="fv-title">探そう</span>
+      </div>
+    </div>
+    <div class="fv-tags" id="fvTags">
+      <span class="fv-tag"><span class="hash">#</span>すべて<span class="em">無料</span></span>
+      <span class="fv-tag"><span class="hash">#</span>オンライン<span class="em">OK</span></span>
+      <span class="fv-tag"><span class="hash">#</span>しつこい勧誘<span class="em">なし</span></span>
+    </div>
+  </header>
+
+  <!-- FVバリアント出し分け（① ?fv= 明示指定 → ② utm_content自動判別 → ③ default）
+       ─ /lp/kensetsu/pro/ の FV_VARIANTS と同じ思想。広告の訴求軸ごとにFVを出し分ける。
+       ─ 自動判別は必ず「バナーID」で厳密マッチする。訴求軸トークン（gesyu70 等）で
+         マッチさせると同一軸の別バナー（ks-S-002_gesyu70）にも誤爆するため禁止。
+       ─ FVの直後に同期実行し、既定コピーが一瞬見えてから差し替わるチラつきを防ぐ。
+       ─ 選ばれたキーは data-fv 属性 / dataLayer(fv_view) / lead_submit の fv に載る。
+         GTMのGA4タグ「GA4 - generate_lead - all」は既に {{DL - fv}} を持つので設定変更は不要。
+       ─ コピーは「1行1箱」の span.fv-title で書く（<br>は使わない）。既定サイズで1行6字まで、
+         7〜8字の行があれば cls:'is-long' を付ける。9字以上の行は作らない（写真の顔にかかる）。
+       ─ 手動確認: ?fv=ks-S-007 を付けて開く。 -->
+  <script>
+  (function(){
+    var FV_VARIANTS={
+      'ks-S-007':{
+        cls:'is-long',   /* 1行目が8字＝既定サイズだと顔にかかる。字を小さくして3行に収める（2026-09-30 本人選択） */
+        copy:'<span class="fv-title"><span class="grad">頑張った分だけ</span>、</span>'+
+             '<span class="fv-title">返ってくる</span>'+
+             '<span class="fv-title">仕事へ。</span>'
+      }
+    };
+    var AD_NAME_TO_FV=[
+      { re:/ks-S-007/i, fv:'ks-S-007' }
+    ];
+    function q(n){ try{ return new URLSearchParams(location.search).get(n)||''; }catch(e){ return ''; } }
+    function resolve(){
+      var f=q('fv');
+      if(f&&FV_VARIANTS[f]) return f;
+      var ad=q('utm_content');
+      if(ad){ for(var i=0;i<AD_NAME_TO_FV.length;i++){ if(AD_NAME_TO_FV[i].re.test(ad)) return AD_NAME_TO_FV[i].fv; } }
+      return 'default';
+    }
+    var key=resolve();
+    window.__fvKey=key;
+    var v=FV_VARIANTS[key];
+    if(v){
+      var c=document.getElementById('fvCopy');
+      if(c&&v.copy){ c.innerHTML=v.copy; if(v.cls) c.classList.add(v.cls); }
+      var t=document.getElementById('fvTags');
+      if(t&&v.tags) t.innerHTML=v.tags;
+    }
+    document.documentElement.setAttribute('data-fv',key);
+    try{
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({event:'fv_view',lp:'kensetsu_stepform',fv:key});
+    }catch(e){}
+  })();
+  </script>
+
+  <!-- 30秒リボン -->
+  <div class="sec30">
+    <span class="small">かんたん</span><span class="big">30</span><span class="small">秒</span>
+  </div>
+
+  <!-- ステップフォーム -->
+  <main class="form-wrap" id="formWrap">
+    <div class="pbar" id="pbar" hidden>
+      <div class="pbar-track"><div class="pbar-fill" id="pbarFill"></div></div>
+      <div class="pbar-text" id="pbarText">1 / 4</div>
+    </div>
+    <div id="stage"></div>
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <nav>
+      <a href="https://reflame.co.jp/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a href="https://reflame.co.jp/" target="_blank" rel="noopener">運営会社</a>
+    </nav>
+    © 株式会社REFLAME All rights reserved.
+  </footer>
+</div>
+
+
+<script>
+(function(){
+  'use strict';
+  var data={};
+  var sent=false;
+
+  /* ▼▼▼ 送信先＝SF日程調整ツールのAPIを直接叩く（2026-09-28 方式B・/lp/kensetsu/pro/ と同方式）▼▼▼
+     embed.js は使わず、フォームもカレンダーも自前で描いて API（/capture・/slots・/book）だけ借りる。
+     旧: GAS→スプシ「建設_LPリード」→取込 ＋ 完了画面から別タブで cc-ad-mk の予約ページへ遷移。
+     枠は cc-ad-mk（本人決定・2026-09-28）。理由: このLPは「建設」を名乗らない（FV・title とも建設語なし）。
+       cc-ad-mk-02 は設問に「建設系の資格」等を持つ経験者LP用なので共用しない。
+     ⚠ CORS は https://reflame.co.jp にだけ開いている（手元のPCからは直接叩けない）。
+     ⚠ payload のキーは枠 cc-ad-mk の Form_Schema と1:1。ずらすと Field Mapping が効かずSFに保存されない。
+        キーの実物は `curl -s ".../booking/v1/config?slug=cc-ad-mk"` で確認し、下の SF_KEYS を合わせる。 */
+  var API='https://designer.my.site.com/schedulingvforcesite/services/apexrest/booking/v1';
+  var LINK_ID='a1TQ800000KH37dMAD';   /* 建設：広告用 / slug=cc-ad-mk（durationMin 60・windowDays 10） */
+  var WINDOW_DAYS=10;                 /* 枠側の「表示日数」と揃える */
+  /* 標準3項目（LastName/FirstName/Email）以外の設問キー。2026-09-28 に本人指示で cc-ad-mk へ設問追加・全て必須。
+     config 実測（2026-09-28）: field4=電話番号(tel) / field7=生まれた年（西暦）(text) / field8=ご希望の勤務地(select51)。
+     ※フリガナは本人判断で設問にしない（LPでは引き続き聞くが、SFへは旧スプシ経路でのみ届く）。 */
+  var SF_KEYS={
+    tel      :'field4',   /* 電話番号         → Phone */
+    birthYear:'field7',   /* 生まれた年（西暦）→ CON_BirthYearTxtA__c */
+    location :'field8'    /* ご希望の勤務地   → CON_HopeWorkplacePicks__c */
+  };
+  /* ▲▲▲ ここまで ▲▲▲ */
+
+  /* 移行期間の並走（2026-09-28）。true の間は旧GASにも送る＝スプシ取込経由でコンタクトに
+     リードソース「meta広告」が入り、SFフローの建設Slack即時通知も従来どおり飛ぶ。
+     予約ツール経由のコンタクトはリードソースが空のまま（2026-09-28 SF実測）なので、
+     その穴を埋める手段が決まるまで外さない。false にすればスプシ送信は完全に止まる。
+     ※予約ツールはメールで既存コンタクトに寄せるため、並走しても重複は作らない（実測済み）。 */
+  var SHEET_PARALLEL=true;
+  var SHEET_ENDPOINT='https://script.google.com/macros/s/AKfycbzQcn8fKJelOW_k2xmrB8heGEJ0g1VwThxgAeLZsk3ugy5eI46ZUp3AbbW3HuZdmNYWUQ/exec'; // 2026-09-07: sales.backoffice名義デプロイ（申込直後メール付き）
+
+  var LP='kensetsu_stepform';
+  var SLACK_WEBHOOK='';
+
+  var TOTAL=4;
+  var stage=document.getElementById('stage');
+  var pbar=document.getElementById('pbar');
+
+  function getParam(n){ try{ return new URLSearchParams(location.search).get(n)||''; }catch(e){ return ''; } }
+  function getInfluencer(){
+    var ref=getParam('ref'), src=getParam('utm_source');
+    var m=ref.match(/^aff_(.+)/i)||src.match(/^aff_(.+)/i);
+    if(m) return m[1];
+    return ref;
+  }
+  function normTel(v){
+    return (v||'')
+      .replace(/[０-９]/g,function(d){return String.fromCharCode(d.charCodeAt(0)-0xFEE0);})
+      .replace(/[^0-9]/g,'');
+  }
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  function setProgress(n){
+    pbar.hidden=false;
+    document.getElementById('pbarFill').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('pbarText').textContent=n+' / '+TOTAL;
+  }
+  function render(html){
+    stage.innerHTML='';
+    var box=document.createElement('div');
+    box.className='step-anim';
+    box.innerHTML=html;
+    stage.appendChild(box);
+    return box;
+  }
+  /* 初回ロード時はスクロールしない（FVを見せる）。ユーザーが操作した後だけフォーム位置へ追従 */
+  var interacted=false;
+  document.addEventListener('pointerdown', function(){ interacted=true; }, {once:true, capture:true});
+  document.addEventListener('keydown', function(){ interacted=true; }, {once:true, capture:true});
+  function scrollToForm(){
+    if(!interacted) return;
+    document.getElementById('formWrap').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  /* 選択式ステップ（ラジオカード＋次へ） */
+  function choiceStep(o){ // {step, title, opts, oneCol, onNext}
+    setProgress(o.step);
+    var box=render(
+      '<h2 class="q-title">'+o.title+'</h2>'+
+      '<div class="opts'+(o.oneCol?' one-col':'')+'" role="radiogroup"></div>'+
+      '<button class="next-btn" disabled>次へ <span class="arrow">→</span></button>'+
+      (o.step>1?'<button class="back-link" type="button">← 1つ前に戻る</button>':'')
+    );
+    var wrap=box.querySelector('.opts');
+    var next=box.querySelector('.next-btn');
+    var picked='';
+    o.opts.forEach(function(label){
+      var b=document.createElement('button');
+      b.type='button'; b.className='opt'; b.setAttribute('role','radio'); b.setAttribute('aria-checked','false');
+      b.innerHTML='<span class="mark"></span>'+escapeHtml(label);
+      b.onclick=function(){
+        picked=label;
+        Array.prototype.forEach.call(wrap.children,function(c){ c.classList.remove('picked'); c.setAttribute('aria-checked','false'); });
+        b.classList.add('picked'); b.setAttribute('aria-checked','true');
+        next.disabled=false;
+      };
+      wrap.appendChild(b);
+    });
+    next.onclick=function(){ if(picked) o.onNext(picked); };
+    var back=box.querySelector('.back-link');
+    if(back) back.onclick=function(){ o.onBack && o.onBack(); };
+    scrollToForm();
+  }
+
+  /* 入力式ステップ */
+  function inputStep(o){ // {step, title, placeholder, type, inputmode, autocomplete, hint, validate, errMsg, onNext, onBack}
+    setProgress(o.step);
+    var box=render(
+      '<h2 class="q-title">'+o.title+'</h2>'+
+      '<div class="field"><input type="'+(o.type||'text')+'" placeholder="'+o.placeholder+'"'+
+        (o.inputmode?' inputmode="'+o.inputmode+'"':'')+
+        (o.autocomplete?' autocomplete="'+o.autocomplete+'"':'')+'></div>'+
+      (o.hint?'<div class="field-hint">'+o.hint+'</div>':'')+
+      '<div class="field-err">'+(o.errMsg||'入力内容をご確認ください')+'</div>'+
+      '<button class="next-btn">次へ <span class="arrow">→</span></button>'+
+      '<button class="back-link" type="button">← 1つ前に戻る</button>'
+    );
+    var input=box.querySelector('input');
+    var err=box.querySelector('.field-err');
+    function submit(){
+      var v=input.value.trim();
+      if(!o.validate(v)){ err.classList.add('show'); input.style.borderColor='#e53935'; return; }
+      o.onNext(v);
+    }
+    box.querySelector('.next-btn').onclick=submit;
+    input.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); } });
+    input.addEventListener('input',function(){ err.classList.remove('show'); input.style.borderColor=''; });
+    box.querySelector('.back-link').onclick=function(){ o.onBack && o.onBack(); };
+    scrollToForm();
+    input.focus();
+  }
+
+  /* ──────────────────────────────
+     ステップフロー（全4問・Zキャリア型ステップフォーム）
+     勤務地 → 姓/名 → 生まれた年 → メール/電話 → 確認 → ★送信(CV) → 日時選択 → 予約確定
+     2026-09-28: 「いつごろから働きたいか」「希望の働き方」を削除（本人決定・SF側に保存先なし）
+  ────────────────────────────── */
+  // Q3 希望勤務地（都道府県プルダウン）
+  var PREFS=['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+  function q3(){
+    setProgress(1);
+    var opts='<option value="">選択してください</option>';
+    PREFS.concat(['決まってない・相談したい']).forEach(function(p){
+      opts+='<option'+(data.location===p?' selected':'')+'>'+p+'</option>';
+    });
+    var box=render(
+      '<h2 class="q-title">希望の<span class="hl">勤務地</span>を教えてください</h2>'+
+      '<div class="field"><select aria-label="希望勤務地">'+opts+'</select></div>'+
+      '<button class="next-btn"'+(data.location?'':' disabled')+'>次へ <span class="arrow">→</span></button>'
+    );
+    var sel=box.querySelector('select');
+    var next=box.querySelector('.next-btn');
+    sel.onchange=function(){ next.disabled=!sel.value; };
+    next.onclick=function(){ if(sel.value){ data.location=sel.value; interacted=true; nav(2); } };
+    scrollToForm();
+  }
+  // Q4 お名前＋フリガナ（1画面）
+  function q4(){
+    setProgress(2);
+    /* 2026-09-28: 姓・名を別欄に（SF側 LastName/FirstName が必須のため。1欄だとスペース無し入力で名が空になり /book が失敗する）。
+       フリガナは本人判断で廃止（SFに保存先を作らない）。 */
+    var box=render(
+      '<h2 class="q-title"><span class="hl">お名前</span>を教えてください</h2>'+
+      '<div class="flabel">姓</div>'+
+      '<div class="field"><input type="text" data-k="last" placeholder="例：山田" autocomplete="family-name" value="'+escapeHtml(data.lastName||'')+'"></div>'+
+      '<div class="flabel">名</div>'+
+      '<div class="field"><input type="text" data-k="first" placeholder="例：太郎" autocomplete="given-name" value="'+escapeHtml(data.firstName||'')+'"></div>'+
+      '<div class="field-err" data-e="name">姓・名の両方をご入力ください</div>'+
+      '<button class="next-btn">次へ <span class="arrow">→</span></button>'+
+      '<button class="back-link" type="button">← 1つ前に戻る</button>'
+    );
+    var lastIn=box.querySelector('input[data-k=last]');
+    var firstIn=box.querySelector('input[data-k=first]');
+    var errName=box.querySelector('.field-err[data-e=name]');
+    function submit(){
+      var vl=lastIn.value.trim(), vf=firstIn.value.trim();
+      var okL=!!vl, okF=!!vf;
+      lastIn.style.borderColor=okL?'':'#e53935';
+      firstIn.style.borderColor=okF?'':'#e53935';
+      errName.classList.toggle('show', !(okL&&okF));
+      if(!okL||!okF) return;
+      data.lastName=vl; data.firstName=vf; data.name=vl+' '+vf;
+      nav(3);
+    }
+    box.querySelector('.next-btn').onclick=submit;
+    [lastIn,firstIn].forEach(function(i){
+      i.addEventListener('input',function(){ i.style.borderColor=''; errName.classList.remove('show'); });
+      i.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); } });
+    });
+    box.querySelector('.back-link').onclick=function(){ nav(1); };
+    scrollToForm();
+    lastIn.focus();
+  }
+  // Q5 生年月日（20代向けサービスの明記つき）
+  function q5(){
+    setProgress(3);
+    var thisYear=new Date().getFullYear();
+    var yOpts='<option value="">西暦を選択</option>';
+    /* 18歳相当の年から35歳相当まで（新しい順）。20代向けサービスのためターゲット外の年齢は範囲で絞る。
+       2026-09-28: SFの保存先が「生まれ年（西暦）」なので、月日は聞かない（本人指示） */
+    for(var yy=thisYear-18; yy>=thisYear-35; yy--){ yOpts+='<option'+(data.birthYear===String(yy)?' selected':'')+'>'+yy+'</option>'; }
+    var box=render(
+      '<h2 class="q-title"><span class="hl">生まれた年</span>を教えてください</h2>'+
+      '<div class="birth-card">'+
+        '<div class="birth-note">※本サービスは、20代向けのサービスです。</div>'+
+        '<div class="birth-row">'+
+          '<select data-k="y" aria-label="生まれた年（西暦）">'+yOpts+'</select><span class="unit">年</span>'+
+        '</div>'+
+      '</div>'+
+      '<button class="next-btn"'+(data.birthYear?'':' disabled')+'>次へ <span class="arrow">→</span></button>'+
+      '<button class="back-link" type="button">← 1つ前に戻る</button>'
+    );
+    var sy=box.querySelector('select[data-k=y]');
+    var next=box.querySelector('.next-btn');
+    sy.onchange=function(){ next.disabled=!sy.value; };
+    next.onclick=function(){
+      if(!sy.value) return;
+      data.birthYear=sy.value;
+      data.birth=sy.value;   /* 旧スプシ並走用（生年月日列には年のみが入る） */
+      nav(4);
+    };
+    box.querySelector('.back-link').onclick=function(){ nav(2); };
+    scrollToForm();
+  }
+  // Q6 連絡先（メールアドレス＋電話番号・最後の質問）
+  function q6(){
+    setProgress(4);
+    var box=render(
+      '<h2 class="q-title"><span class="hl">ご連絡先</span>を教えてください</h2>'+
+      '<div class="flabel">メールアドレス</div>'+
+      '<div class="field"><input type="email" data-k="email" placeholder="example@email.com" inputmode="email" autocomplete="email" value="'+escapeHtml(data.email||'')+'"></div>'+
+      '<div class="field-err" data-e="email">正しいメールアドレスをご入力ください</div>'+
+      '<div class="flabel">お電話番号</div>'+
+      '<div class="field"><input type="tel" data-k="tel" placeholder="09012345678（ハイフンなし）" inputmode="numeric" autocomplete="tel" value="'+escapeHtml(data.tel||'')+'"></div>'+
+      '<div class="field-err" data-e="tel">090・080・070・050から始まる携帯番号をご入力ください</div>'+
+      '<button class="next-btn">次へ <span class="arrow">→</span></button>'+
+      '<button class="back-link" type="button">← 1つ前に戻る</button>'
+    );
+    var emailIn=box.querySelector('input[data-k=email]');
+    var telIn=box.querySelector('input[data-k=tel]');
+    var errEmail=box.querySelector('.field-err[data-e=email]');
+    var errTel=box.querySelector('.field-err[data-e=tel]');
+    function submit(){
+      var ve=emailIn.value.trim(), vt=telIn.value;
+      var okE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ve);
+      var okT=/^(090|080|070|050)\d{8}$/.test(normTel(vt));
+      errEmail.classList.toggle('show', !okE); emailIn.style.borderColor=okE?'':'#e53935';
+      errTel.classList.toggle('show', !okT); telIn.style.borderColor=okT?'':'#e53935';
+      if(!okE||!okT) return;
+      data.email=ve; data.tel=normTel(vt);
+      nav(5);
+    }
+    box.querySelector('.next-btn').onclick=submit;
+    [emailIn,telIn].forEach(function(i){
+      i.addEventListener('input',function(){ i.style.borderColor=''; errEmail.classList.remove('show'); errTel.classList.remove('show'); });
+      i.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); } });
+    });
+    /* メール欄を離れた瞬間に先行登録（送信まで進まず離脱した人をSFに残す） */
+    emailIn.addEventListener('blur',function(){
+      var ve=emailIn.value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ve)) return;
+      data.email=ve;
+      var t=normTel(telIn.value); if(/^(090|080|070|050)\d{8}$/.test(t)) data.tel=t;
+      capture(false);
+    });
+    box.querySelector('.back-link').onclick=function(){ nav(3); };
+    scrollToForm();
+    emailIn.focus();
+  }
+
+  /* 最終確認＋送信 */
+  function confirmStep(){
+    setProgress(4);
+    var box=render(
+      '<h2 class="q-title">内容を確認して<span class="hl">送信</span>してください</h2>'+
+      '<div class="opts one-col" style="pointer-events:none">'+
+        '<div class="opt"><span>お名前：'+escapeHtml(data.name||'-')+'</span></div>'+
+        '<div class="opt"><span>生まれた年：'+escapeHtml(data.birthYear||'-')+'年</span></div>'+
+        '<div class="opt"><span>希望勤務地：'+escapeHtml(data.location||'-')+'</span></div>'+
+        '<div class="opt"><span>メール：'+escapeHtml(data.email||'-')+' ／ 電話：'+escapeHtml(data.tel||'-')+'</span></div>'+
+      '</div>'+
+      '<button class="next-btn">無料相談に申し込む</button>'+
+      '<p class="consent">送信をもって<a href="https://reflame.co.jp/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意したものとみなします。</p>'+
+      '<button class="back-link" type="button">← 1つ前に戻る</button>'
+    );
+    var btn=box.querySelector('.next-btn');
+    btn.onclick=function(){
+      if(btn.disabled) return;
+      btn.disabled=true; btn.textContent='送信中…';
+      setTimeout(complete, 450);
+    };
+    box.querySelector('.back-link').onclick=function(){ nav(4); };
+    scrollToForm();
+  }
+
+  /* 移行期間のみ（SHEET_PARALLEL）。旧スプシの列を崩さないよう、削除した設問のキーは空で送る */
+  function sendToSheet(){
+    if(!SHEET_PARALLEL||!SHEET_ENDPOINT) return;
+    var payload={
+      lastName:data.lastName||'', firstName:data.firstName||'',
+      kanaLast:data.kanaLast||'', kanaFirst:data.kanaFirst||'',
+      name:data.name||'', kana:data.kana||'',
+      email:data.email||'', tel:data.tel||'',
+      timing:'', workstyle:'',
+      location:data.location||'', birth:data.birth||'',
+      ref:getInfluencer(),
+      utm_source:getParam('utm_source'),
+      utm_medium:getParam('utm_medium'),
+      utm_campaign:getParam('utm_campaign'),
+      utm_content:getParam('utm_content'),
+      page:location.href
+    };
+    try{
+      fetch(SHEET_ENDPOINT,{
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(payload)
+      }).catch(function(){});
+    }catch(e){}
+  }
+  function sendToSlack(){
+    if(!SLACK_WEBHOOK) return;
+    var text=[
+      ':fire: *建設ステップフォームLPに新規リード！*',
+      'お名前：'+(data.name||'-'),
+      '生まれた年：'+(data.birthYear||'-'),
+      '希望勤務地：'+(data.location||'-'),
+      '電話：'+(data.tel||'-'),
+      'メール：'+(data.email||'-'),
+      'インフルエンサー：'+(getInfluencer()||'(なし)'),
+      '流入元：'+(getParam('utm_source')||'-')+' / '+(getParam('utm_medium')||'-')
+    ].join('\n');
+    try{
+      fetch(SLACK_WEBHOOK,{ method:'POST', mode:'no-cors', body:JSON.stringify({text:text}) }).catch(function(){});
+    }catch(e){}
+  }
+
+  /* ★CVはここ（フォーム回答が終わった瞬間）。予約完了ではない（/lp/kensetsu/pro/ と同じ判断）。
+     event/lp の値は旧版から変えていない＝既存GTMトリガー（lead_submit × /lp/kensetsu）がそのまま発火し、
+     配信中の広告セットの最適化イベント（CompleteRegistration）も学習も途切れない。
+     ⚠ 予約完了をCVにしてはいけない（建設はフォーム28件/月→予約13件/月。深くすると学習が止まる）。 */
+  function pushConversion(){
+    try{
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({
+        event:'lead_submit',
+        lp:LP,
+        fv:(window.__fvKey||'default'),
+        lp_location:data.location||'',
+        utm_source:getParam('utm_source'),
+        utm_medium:getParam('utm_medium'),
+        utm_campaign:getParam('utm_campaign')
+      });
+    }catch(e){}
+  }
+
+  /* ══════════ SF日程調整ツール API ══════════ */
+
+  /* 流入計測。embed.js の tracking() と同じ形で送る（サーバー側の解釈を変えないため）。
+     utm_* から予約側の リードソース（LS_*）が自動分類される（ig/paid_social → Meta広告・2026-09-28 実測）。
+     _fbp/_fbc は Meta のサーバー送信(CAPI)で使われるので必ず載せる。 */
+  function tracking(){
+    var p; try{ p=new URLSearchParams(location.search); }catch(e){ return {}; }
+    var t={};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+      if(p.get(k)) t[k]=p.get(k);
+    });
+    if(p.get('aff_id')||p.get('aff')) t.aff_id=p.get('aff_id')||p.get('aff');
+    if(p.get('cid')) t.cid=p.get('cid');
+    ['ls_major','ls_mid','ls_sub','ls_detail','ls_touch','campaign2'].forEach(function(k){
+      if(p.get(k)) t[k]=p.get(k);
+    });
+    var all={}; p.forEach(function(v,k){ if(k&&v) all[k]=v; });
+    if(Object.keys(all).length) t.params=all;
+    t.lp=p.get('lp')||location.href;
+    try{
+      var ck={},c=document.cookie||'';
+      var m1=c.match(/(?:^|; )_fbp=([^;]+)/); if(m1) ck.fbp=decodeURIComponent(m1[1]);
+      var m2=c.match(/(?:^|; )_fbc=([^;]+)/); if(m2) ck.fbc=decodeURIComponent(m2[1]);
+      var m3=c.match(/(?:^|; )_ttp=([^;]+)/); if(m3) ck.ttp=decodeURIComponent(m3[1]);
+      if(p.get('fbclid')) ck.fbclid=p.get('fbclid');
+      if(p.get('ttclid')) ck.ttclid=p.get('ttclid');
+      if(navigator.userAgent) ck.ua=String(navigator.userAgent).slice(0,512);
+      if(Object.keys(ck).length) t.click=ck;
+    }catch(e){}
+    return t;
+  }
+
+  /* 勤務地の値を SF の選択リスト（CON_HopeWorkplacePicks__c）の値に寄せる。
+     都道府県はそのまま一致。LP独自の「決まってない・相談したい」だけ「全国どこでも」へ。 */
+  function sfLocation(v){ return v==='決まってない・相談したい'?'全国どこでも':(v||''); }
+
+  /* SFへ渡す回答。キーは枠 cc-ad-mk の Form_Schema と1:1（SF_KEYS）。 */
+  function answersSF(){
+    var a={
+      LastName : data.lastName||'',
+      FirstName: data.firstName||'',
+      Email    : data.email||''
+    };
+    a[SF_KEYS.tel]      =data.tel||'';
+    a[SF_KEYS.birthYear]=data.birthYear||'';
+    a[SF_KEYS.location] =sfLocation(data.location);
+    return a;
+  }
+
+  function api(path,opts){
+    opts=opts||{};
+    /* GETに Content-Type を付けるとプリフライト(OPTIONS)が毎回飛ぶ。body があるときだけ付ける */
+    var head={}; if(opts.body) head['Content-Type']='application/json';
+    return fetch(API+path,Object.assign({credentials:'omit'},opts,{headers:head}))
+      .then(function(r){
+        return r.json().catch(function(){ throw new Error('サーバーから不正な応答が返りました'); })
+          .then(function(j){
+            if(!j||j.ok!==true) throw new Error((j&&j.error)||'通信に失敗しました');
+            return j.data;
+          });
+      });
+  }
+
+  /* ══════════ 途中離脱者をSFに残す（/capture） ══════════
+     方式Bは /book でしか予約を書かないため、これが無いと「回答は終えたが日時を選ばず離脱」した人
+     （旧フロー実測で54%）がSFに一切残らない。枠 cc-ad-mk は captureOnEmail:true なので使える。
+     メール欄を離れた瞬間と、送信直後（全回答が揃った状態）の2回叩く。
+     ⚠ 失敗しても**絶対にユーザーの操作を止めない**（握りつぶす）。 */
+  var captured=null;
+  function capture(force){
+    try{
+      var em=String(data.email||'').trim().toLowerCase();
+      if(!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(em)) return;
+      if(!force && em===captured) return;
+      captured=em;
+      var snap={}, a=answersSF();
+      Object.keys(a).forEach(function(k){ if(a[k]!=null&&a[k]!=='') snap[k]=a[k]; });
+      snap.Email=em;
+      api('/capture',{method:'POST',body:JSON.stringify({
+        linkId:LINK_ID, payload:snap, tracking:tracking()
+      })}).then(function(){
+        try{ window.dataLayer=window.dataLayer||[];
+             window.dataLayer.push({event:'lead_capture',lp:LP,fv:(window.__fvKey||'default')}); }catch(e){}
+      }).catch(function(){ /* 失敗は無視。ユーザーには見せない */ });
+    }catch(e){}
+  }
+
+  /* ══════════ 送信 → 日時選択 → 予約確定 ══════════
+     2026-09-29 改修（本人指示「空き時間が出るまでが遅い」＋週グリッド表示）
+     ── 遅さの原因（実測）──
+       ① /slots は1日ごとにGoogleカレンダーへ同期照会する。cc-ad-mk（担当3名）は1日2.0〜2.9秒、
+          10日並列でも最も遅い日に律速されて約3.1秒（1名枠の cc-ad-mk-02 は1.9秒）
+       ② 旧版は「送信 → /gate の応答を待つ → それから /slots」の直列。送信を押すまで1本も取りに行かない
+     ── 対策 ──
+       ・先読み: 生まれた年のステップ（#step3）に入った時点で、最初の5日の空き枠を裏で取り始める。
+         残り2画面（連絡先・確認）の入力中に取り終わるので、送信直後はキャッシュから即表示
+       ・/gate と /slots を並列に。gate が担当者を絞ったときだけ取り直す（9/28時点は全ルール pass）
+       ・グリッドは表示中の5日だけ取る。次の5日は「›」を押したときに取る
+       ・鮮度: 先読み結果は90秒で捨てる。古くても /book でサーバが空きを再検証するので二重予約にはならない
+     ── 表示 ── embed.js の週グリッド（7日×時刻・予約可=枠線／不可=グレー・‹ 週送り ›）と同じ構成 */
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var booking=false;
+  /* 枠 cc-ad-mk は「質問で振り分け」（gateEnabled:true）。embed.js と同じく /gate で判定し、担当者が絞られたら
+     /slots に routed を付ける。/book でもサーバが再判定するので、ここは表示分岐用。
+     /gate 自体が落ちたときは pass 扱いで続行する（候補者を止めない）。 */
+  var routed=[];
+  function runGate(){
+    return api('/gate',{method:'POST',body:JSON.stringify({
+      linkId:LINK_ID, payload:answersSF(), tracking:tracking()
+    })}).catch(function(){ return {action:'pass'}; });
+  }
+
+  function ymd(d){
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+  function jpDate(d){
+    var w=['日','月','火','水','木','金','土'][d.getDay()];
+    return (d.getMonth()+1)+'月'+d.getDate()+'日（'+w+'）';
+  }
+  function hhmm(iso){
+    var d=new Date(iso);
+    return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  }
+  function formTop(){
+    document.getElementById('formWrap').scrollIntoView({behavior:reduce?'auto':'smooth', block:'start'});
+  }
+
+  /* ── 空き枠キャッシュ（date|routed → {at, promise}）── */
+  var SLOT_TTL_MS=90000;
+  var slotCache={};
+  function fetchSlots(ds){
+    var key=ds+'|'+routed.join(',');
+    var hit=slotCache[key];
+    if(hit && (Date.now()-hit.at)<SLOT_TTL_MS) return hit.promise;
+    var pr=api('/slots?linkId='+encodeURIComponent(LINK_ID)+'&date='+encodeURIComponent(ds)+
+               (routed.length?'&routed='+encodeURIComponent(routed.join(',')):''));
+    pr.catch(function(){ delete slotCache[key]; });   /* 失敗はキャッシュしない */
+    slotCache[key]={at:Date.now(), promise:pr};
+    return pr;
+  }
+
+  /* ── 表示ページの計算。1画面＝DAYS_PER_VIEW日（2026-09-29 本人指示で7日→5日）。
+     受付期間は今日から WINDOW_DAYS 日（0〜9日目）。10日÷5日＝ちょうど2ページ。期間外は off（押せない・取りに行かない）── */
+  var DAYS_PER_VIEW=5;
+  var W=['日','月','火','水','木','金','土'];
+  var weekOffset=0, weekSlots={};
+  function maxWeekOffset(){ return Math.ceil(WINDOW_DAYS/DAYS_PER_VIEW)-1; }
+  function weekDates(offset){
+    var today=new Date(); today.setHours(0,0,0,0);
+    var out=[];
+    for(var i=0;i<DAYS_PER_VIEW;i++){
+      var idx=offset*DAYS_PER_VIEW+i;
+      var d=new Date(today); d.setDate(d.getDate()+idx);
+      out.push({iso:ymd(d), day:d.getDate(), dow:W[d.getDay()], wd:d.getDay(), off:(idx>=WINDOW_DAYS)});
+    }
+    return out;
+  }
+
+  /* ── 先読み（#step3 に入ったら1回だけ）── */
+  var prefetched=false;
+  function prefetchSlots(){
+    if(prefetched||sent) return;
+    prefetched=true;
+    try{ weekDates(0).forEach(function(d){ if(!d.off) fetchSlots(d.iso).catch(function(){}); }); }catch(e){}
+  }
+
+  function complete(){
+    if(sent) return; sent=true;
+    pushConversion();          /* ★ここでCV */
+    capture(true);
+    sendToSheet();
+    sendToSlack();
+    pbar.hidden=true;
+    routing=true; replaceHash('#calendar'); routing=false;
+    render(
+      '<div class="cal-intro" role="status">'+
+        '<div class="done-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>'+
+        '<p class="ci-thanks">'+escapeHtml(data.lastName||data.name||'')+'さん、ご回答ありがとうございます！</p>'+
+        '<p class="ci-lead">続けて、ご希望の面談日時をお選びください。</p>'+
+        '<p class="ci-note">面談予約は、日時の選択で完了します。</p>'+
+      '</div>'+
+      '<div class="cal-box">'+
+        '<div class="cal-hd"><span class="dur">所要時間 60分</span><h3>無料相談の日時を選ぶ</h3></div>'+
+        '<div class="cal-body">'+
+          '<div class="wk-bar">'+
+            '<p class="wk-ttl">日時を選択してください</p>'+
+            '<div class="wk-nav">'+
+              '<button type="button" class="wk-btn" id="wkPrev" aria-label="前の5日">‹</button>'+
+              '<span class="wk-lbl" id="wkLbl"></span>'+
+              '<button type="button" class="wk-btn" id="wkNext" aria-label="次の5日">›</button>'+
+            '</div>'+
+          '</div>'+
+          '<div id="cal"><p class="cal-load">空き日時を取得しています…</p></div>'+
+          '<p class="cal-note">ご希望がない限り、求人のご紹介はいたしません。</p>'+
+        '</div>'+
+      '</div>'
+    );
+    document.getElementById('wkPrev').onclick=function(){ if(weekOffset>0){ weekOffset--; loadWeek(false); } };
+    document.getElementById('wkNext').onclick=function(){ if(weekOffset<maxWeekOffset()){ weekOffset++; loadWeek(false); } };
+    formTop();
+    weekOffset=0; weekSlots={};
+    var t0=Date.now();
+    loadWeek(true, t0);        /* 先読み済みならキャッシュから即描画 */
+    runGate().then(function(g){
+      if(g&&g.action==='block'){
+        routed=[];
+        var box=document.getElementById('cal');
+        if(box) box.innerHTML='<p class="cal-empty">'+escapeHtml(g.message||'ご案内できる日程が現在ございません。')+
+          '<br>担当より改めてご連絡いたします。</p>';
+        try{ window.dataLayer=window.dataLayer||[];
+             window.dataLayer.push({event:'gate_block',lp:LP,fv:(window.__fvKey||'default')}); }catch(e){}
+        return;
+      }
+      var r=(g&&g.assignees)?g.assignees:[];
+      if(r.join(',')!==routed.join(',')){   /* 担当者が絞られたときだけ取り直す */
+        routed=r; weekSlots={}; loadWeek(true, t0);
+      }
+    });
+  }
+
+  function updateWeekBar(){
+    var ds=weekDates(weekOffset);
+    var lbl=document.getElementById('wkLbl');
+    if(lbl) lbl.textContent=ds[0].iso.slice(5).replace('-','/')+' - '+ds[ds.length-1].iso.slice(5).replace('-','/');
+    var p=document.getElementById('wkPrev'), n=document.getElementById('wkNext');
+    if(p) p.disabled=(weekOffset<=0);
+    if(n) n.disabled=(weekOffset>=maxWeekOffset());
+  }
+
+  /* 表示週の全日を並列取得して描く。autoJump=true なら、その週に空きが無いとき受付期間内で次週へ進む。
+     t0 を渡すと、送信から描画までの待ち時間を slot_view で計測する（先読みの効き目を測るため）。 */
+  function loadWeek(autoJump, t0){
+    var box=document.getElementById('cal'); if(!box) return;
+    updateWeekBar();
+    var ds=weekDates(weekOffset);
+    var need=ds.filter(function(d){ return !d.off && weekSlots[d.iso]===undefined; });
+    if(need.length) box.innerHTML='<p class="cal-load">空き日時を取得しています…</p>';
+    var my=weekOffset, myRouted=routed.join(',');
+    Promise.all(need.map(function(d){
+      return fetchSlots(d.iso)
+        .then(function(list){ weekSlots[d.iso]=list||[]; })
+        .catch(function(){ weekSlots[d.iso]=[]; });    /* 1日の失敗で週全体を落とさない */
+    })).then(function(){
+      if(my!==weekOffset || myRouted!==routed.join(',')) return;   /* 取得中に週送り/振り分けが変わった */
+      var any=ds.some(function(d){ return !d.off && (weekSlots[d.iso]||[]).length>0; });
+      if(!any && autoJump && weekOffset<maxWeekOffset()){ weekOffset++; loadWeek(true, t0); return; }
+      renderGrid();
+      if(t0){
+        try{ window.dataLayer=window.dataLayer||[];
+             window.dataLayer.push({event:'slot_view',lp:LP,fv:(window.__fvKey||'default'),
+               slot_wait_ms:Date.now()-t0, slot_prefetched:prefetched?'1':'0'}); }catch(e){}
+      }
+    });
+  }
+
+  /* 予約失敗の案内。再描画で #cal が描き直されても消えないよう、描画時に先頭へ差し込む
+     （2026-09-29 実送信テストで発覚: 失敗理由が一瞬で消え、無言でカレンダーに戻っていた） */
+  var bookErrMsg='';
+  function renderGrid(){
+    var box=document.getElementById('cal'); if(!box) return;
+    updateWeekBar();
+    var errHtml=bookErrMsg?'<p class="field-err show" role="alert" style="margin:0 0 14px">'+escapeHtml(bookErrMsg)+'</p>':'';
+    bookErrMsg='';
+    var ds=weekDates(weekOffset);
+    /* 週内に存在する時刻をすべて集める（担当者ごとに営業時間が違っても取りこぼさない） */
+    var times={};
+    ds.forEach(function(d){ (weekSlots[d.iso]||[]).forEach(function(sl){ times[hhmm(sl.startIso)]=true; }); });
+    var sorted=Object.keys(times).sort();
+    if(!sorted.length){
+      box.innerHTML=errHtml+(weekOffset<maxWeekOffset()
+        ? '<p class="cal-empty">この期間は空き日時がありません。「›」で次の5日間をご覧ください。</p>'
+        : '<p class="cal-empty">申し訳ありません。ただいま空き日時がありません。<br>担当より改めてご連絡いたしますので、このままお待ちください。</p>');
+      return;
+    }
+    var html='<div class="wk-grid" role="grid">'+
+      '<div class="wk-row">'+ds.map(function(d){
+        return '<div class="wk-head'+(d.off?' off':'')+(d.wd===0?' sun':'')+(d.wd===6?' sat':'')+'">'+
+               '<span class="wk-day">'+d.day+'</span><span class="wk-dow">'+d.dow+'</span></div>';
+      }).join('')+'</div>'+
+      sorted.map(function(t){
+        return '<div class="wk-row">'+ds.map(function(d){
+          var hit=null;
+          (weekSlots[d.iso]||[]).some(function(sl){ if(hhmm(sl.startIso)===t){ hit=sl; return true; } return false; });
+          return hit
+            ? '<button type="button" class="wk-cell open" data-iso="'+escapeHtml(hit.startIso)+'" aria-label="'+escapeHtml(jpDate(new Date(hit.startIso))+' '+t)+'">'+t+'</button>'
+            : '<span class="wk-cell closed" aria-hidden="true">'+t+'</span>';
+        }).join('')+'</div>';
+      }).join('')+
+      '</div><p class="wk-hint">枠線のある時間が予約できます。押すと確認に進みます。</p>';
+    box.innerHTML=errHtml+html;
+    Array.prototype.forEach.call(box.querySelectorAll('.wk-cell.open'),function(b){
+      b.addEventListener('click',function(){ confirmSlot(b.getAttribute('data-iso')); });
+    });
+  }
+
+  function confirmSlot(iso){
+    if(booking) return;
+    var d=new Date(iso);
+    var box=document.getElementById('cal');
+    box.innerHTML=
+      '<div class="cal-confirm">'+
+        '<p class="cc-q">この日時で予約を確定します</p>'+
+        '<p class="cc-dt">'+escapeHtml(jpDate(d)+' '+hhmm(iso)+'〜')+'</p>'+
+        '<button type="button" class="next-btn" id="bookGo"><span class="label">この日時で確定する</span></button>'+
+        '<button type="button" class="back-link" id="bookBack">← 別の日時を選ぶ</button>'+
+      '</div>';
+    document.getElementById('bookGo').onclick=function(){ doBook(iso,this); };
+    document.getElementById('bookBack').onclick=function(){ renderGrid(); };
+    try{ window.dataLayer=window.dataLayer||[];
+         window.dataLayer.push({event:'slot_select',lp:LP,fv:(window.__fvKey||'default')}); }catch(e){}
+  }
+
+  function doBook(iso,btn){
+    if(booking) return;
+    booking=true;
+    btn.disabled=true;
+    btn.querySelector('.label').textContent='予約を確定しています…';
+    api('/book',{method:'POST',body:JSON.stringify({
+      linkId:LINK_ID, slotIso:iso, payload:answersSF(), tracking:tracking(), assignee:null
+    })}).then(function(r){
+      /* 予約完了は計測のみ（最適化イベントにはしない） */
+      try{
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({event:'schedule_complete',lp:LP,
+          fv:(window.__fvKey||'default'), booking_id:(r&&r.bookingId)||''});
+      }catch(e){}
+      var d=new Date(iso);
+      render(
+        '<div class="done" role="status">'+
+          '<div class="done-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>'+
+          '<h2>ご予約ありがとうございます</h2>'+
+          '<p class="booked-dt">'+escapeHtml(jpDate(d)+' '+hhmm(iso)+'〜')+'</p>'+
+          '<p>確認メールを <b>'+escapeHtml(data.email||'')+'</b> 宛にお送りしました。<br>'+
+          '当日はメールに記載のURLよりご参加ください。</p>'+
+        '</div>'
+      );
+      routing=true; replaceHash('#complete'); routing=false;
+      formTop();
+    }).catch(function(e){
+      booking=false;
+      btn.disabled=false;
+      btn.querySelector('.label').textContent='この日時で確定する';
+      bookErrMsg='予約に失敗しました（'+(e.message||'通信エラー')+'）。お手数ですが、別の日時をお選びください。';
+      try{ window.dataLayer=window.dataLayer||[];
+           window.dataLayer.push({event:'schedule_error',lp:LP,fv:(window.__fvKey||'default')}); }catch(x){}
+      slotCache={}; weekSlots={}; loadWeek(false);
+    });
+  }
+
+  /* ══════════════════════════════════════════
+     ハッシュルーター（#step1〜#step5 / #calendar / #complete）
+     2026-09-29 追加（本人指示）: /lp/kensetsu/pro/ と同じ作り。
+       #step1=勤務地 #step2=姓名 #step3=生まれた年 #step4=連絡先 #step5=確認
+       #calendar=送信後の日時選択 #complete=予約確定後
+     ・ブラウザの「戻る/進む」で前後のステップへ移動でき、入力は data に残るので消えない
+     ・未回答のステップへの直リンク/飛び越しは、進める最大のステップへ巻き戻す
+     ・送信後はフォームへ戻さない（二重送信・混乱の防止）
+     ・各ステップの表示で form_step_view を1回だけ積む（GA4でステップ別の離脱が取れる）
+     ⚠ このLPに離脱ポップアップは無いので、pro にある popstate の selfNav 目印は不要。 */
+  var STEPS={1:q3,2:q4,3:q5,4:q6,5:confirmStep};
+  var MAX_STEP=5;
+  var routing=false;
+  var lastTracked=0;
+
+  function unlocked(n){
+    if(n<=1) return true;
+    if(n===2) return !!data.location;
+    if(n===3) return unlocked(2) && !!data.lastName && !!data.firstName;
+    if(n===4) return unlocked(3) && !!data.birthYear;
+    if(n===5) return unlocked(4) && !!data.email && !!data.tel;
+    return false;
+  }
+  function maxUnlocked(){
+    for(var i=MAX_STEP;i>=1;i--){ if(unlocked(i)) return i; }
+    return 1;
+  }
+  function hashStep(){
+    var m=(location.hash||'').match(/^#step(\d+)$/);
+    return m?parseInt(m[1],10):0;
+  }
+  function replaceHash(h){
+    try{ history.replaceState(null,'',location.pathname+location.search+h); }catch(e){}
+  }
+  function trackStepView(n){
+    if(n===lastTracked) return;      /* 同一ステップの再描画では積まない（巻き戻し時の二重計上防止） */
+    lastTracked=n;
+    try{
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({
+        event:'form_step_view', lp:LP, form_step:n,
+        fv:(window.__fvKey||'default'),
+        virtual_path:location.pathname+'#step'+n
+      });
+    }catch(e){}
+  }
+  function draw(n){ STEPS[n](); trackStepView(n); if(n>=3) prefetchSlots(); }
+  function nav(n){
+    if(location.hash==='#step'+n){ draw(n); return; }
+    location.hash='step'+n;          /* → hashchange → onRoute → draw */
+  }
+  function onRoute(){
+    if(routing) return;
+    if(sent){
+      if(location.hash!=='#calendar'&&location.hash!=='#complete'){
+        routing=true; replaceHash(booking?'#complete':'#calendar'); routing=false;
+      }
+      return;
+    }
+    var n=hashStep();
+    if(n<1||n>MAX_STEP||!unlocked(n)){
+      var max=maxUnlocked();
+      routing=true; replaceHash('#step'+max); routing=false;
+      draw(max);
+      return;
+    }
+    draw(n);
+  }
+  window.addEventListener('hashchange',onRoute);
+
+  /* 初期表示は必ず #step1（後段への直リンクはデータがないため無効） */
+  if(location.hash!=='#step1') replaceHash('#step1');
+  draw(1);
+})();
+</script>
+</body>
+</html>
