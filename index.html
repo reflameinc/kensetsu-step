@@ -372,16 +372,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* 送信直後の案内＋自前カレンダー（2026-09-28 方式B） */
   .cal-intro{ text-align:center; padding:6px 4px 0; }
-  .cal-intro .done-icon{
-    width:56px; height:56px; margin:4px auto 12px;
-    border:var(--frame); border-radius:50%;
-    background:var(--grad-mid); box-shadow:var(--hard-shadow);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .cal-intro .done-icon svg{ width:28px; height:28px; stroke:#fff; stroke-width:3; fill:none; }
-  .ci-thanks{ font-size:18px; font-weight:900; margin-bottom:6px; }
-  .ci-lead{ font-size:15px; font-weight:700; }
   .ci-note{ font-size:14px; color:#41566b; margin-top:4px; }
+  /* 2026-10-07: 送信後の見出しを質問と同じ .q-title にした（続きのステップに見せる）。下の案内文と詰める */
+  .cal-intro .q-title{ margin-bottom:6px; }
+  .done .mail-note{ margin-top:12px; }
   .cal-body .cal-load,.cal-body .cal-empty{ font-size:14px; text-align:center; margin:4px 0; }
   .cal-day + .cal-day{ margin-top:16px; }
   .cal-body .cd-date{ font-size:15px; font-weight:900; color:var(--ink); margin:0 0 8px; }
@@ -597,8 +591,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ⚠ payload のキーは枠 cc-ad-mk の Form_Schema と1:1。ずらすと Field Mapping が効かずSFに保存されない。
         キーの実物は `curl -s ".../booking/v1/config?slug=cc-ad-mk"` で確認し、下の SF_KEYS を合わせる。 */
   var API='https://designer.my.site.com/schedulingvforcesite/services/apexrest/booking/v1';
-  var LINK_ID='a1TQ800000KH37dMAD';   /* 建設：広告用 / slug=cc-ad-mk（durationMin 60・windowDays 10） */
-  var WINDOW_DAYS=10;                 /* 枠側の「表示日数」と揃える */
+  var LINK_ID='a1TQ800000KH37dMAD';   /* 建設：広告用 / slug=cc-ad-mk（durationMin 60・windowDays 14） */
+  var WINDOW_DAYS=14;                 /* 枠側の「表示日数」と揃える（2026-10-07 本人がSF側を14日に統一→LPも10→14） */
   /* 標準3項目（LastName/FirstName/Email）以外の設問キー。2026-09-28 に本人指示で cc-ad-mk へ設問追加・全て必須。
      config 実測（2026-09-28）: field4=電話番号(tel) / field7=生まれた年（西暦）(text) / field8=ご希望の勤務地(select51)。
      ※フリガナは本人判断で設問にしない（LPでは引き続き聞くが、SFへは旧スプシ経路でのみ届く）。 */
@@ -620,7 +614,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   var LP='kensetsu_stepform';
   var SLACK_WEBHOOK='';
 
-  var TOTAL=4;
+  /* 進捗の分母。2026-10-07 本人指示で 4→5（日時選択を「最後のステップ」として最初から数える）。
+     質問4つ＝1〜4（4の連絡先で送信）、送信後のカレンダーが5。表示専用（ルーターは MAX_STEP を使う）。確認画面は10/7に廃止 */
+  var TOTAL=5;
   var stage=document.getElementById('stage');
   var pbar=document.getElementById('pbar');
 
@@ -720,7 +716,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   /* ──────────────────────────────
      ステップフロー（全4問・Zキャリア型ステップフォーム）
-     勤務地 → 姓/名 → 生まれた年 → メール/電話 → 確認 → ★送信(CV) → 日時選択 → 予約確定
+     勤務地 → 姓/名 → 生まれた年 → メール/電話 ★送信(CV) → 日時選択 → 予約確定（確認画面は2026-10-07に廃止）
      2026-09-28: 「いつごろから働きたいか」「希望の働き方」を削除（本人決定・SF側に保存先なし）
   ────────────────────────────── */
   // Q3 希望勤務地（都道府県プルダウン）
@@ -810,7 +806,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     box.querySelector('.back-link').onclick=function(){ nav(2); };
     scrollToForm();
   }
-  // Q6 連絡先（メールアドレス＋電話番号・最後の質問）
+  // Q6 連絡先（メールアドレス＋電話番号・最後の質問）＝ここで送信
+  /* 2026-10-07 本人指示: 確認画面を廃止（1画面多い・確認画面で週3〜4人が離脱・他社5社も確認画面なし）。
+     ★CV（lead_submit）はこの画面のボタンで発火＝確認画面から1画面前へ移っただけで、イベント名・値は不変（GTM変更なし）。
+     メールの打ち間違いは確認画面が無くなる分、SMSで追いかける運用（本人判断・LP側のチェックは入れない）。 */
   function q6(){
     setProgress(4);
     var box=render(
@@ -821,14 +820,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       '<div class="flabel">お電話番号</div>'+
       '<div class="field"><input type="tel" data-k="tel" placeholder="09012345678（ハイフンなし）" inputmode="numeric" autocomplete="tel" value="'+escapeHtml(data.tel||'')+'"></div>'+
       '<div class="field-err" data-e="tel">090・080・070・050から始まる携帯番号をご入力ください</div>'+
-      '<button class="next-btn">次へ <span class="arrow">→</span></button>'+
+      '<button class="next-btn">面談日時を選ぶ <span class="arrow">→</span></button>'+
+      '<p class="consent">「面談日時を選ぶ」を押すと、<a href="https://reflame.co.jp/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意したものとみなします。</p>'+
       '<button class="back-link" type="button">← 1つ前に戻る</button>'
     );
     var emailIn=box.querySelector('input[data-k=email]');
     var telIn=box.querySelector('input[data-k=tel]');
     var errEmail=box.querySelector('.field-err[data-e=email]');
     var errTel=box.querySelector('.field-err[data-e=tel]');
+    var btn=box.querySelector('.next-btn');
     function submit(){
+      if(btn.disabled) return;
       var ve=emailIn.value.trim(), vt=telIn.value;
       var okE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ve);
       var okT=/^(090|080|070|050)\d{8}$/.test(normTel(vt));
@@ -836,9 +838,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       errTel.classList.toggle('show', !okT); telIn.style.borderColor=okT?'':'#e53935';
       if(!okE||!okT) return;
       data.email=ve; data.tel=normTel(vt);
-      nav(5);
+      btn.disabled=true; btn.textContent='読み込み中…';
+      setTimeout(complete, 450);
     }
-    box.querySelector('.next-btn').onclick=submit;
+    btn.onclick=submit;
     [emailIn,telIn].forEach(function(i){
       i.addEventListener('input',function(){ i.style.borderColor=''; errEmail.classList.remove('show'); errTel.classList.remove('show'); });
       i.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); } });
@@ -856,30 +859,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     emailIn.focus();
   }
 
-  /* 最終確認＋送信 */
-  function confirmStep(){
-    setProgress(4);
-    var box=render(
-      '<h2 class="q-title">内容を確認して<span class="hl">送信</span>してください</h2>'+
-      '<div class="opts one-col" style="pointer-events:none">'+
-        '<div class="opt"><span>お名前：'+escapeHtml(data.name||'-')+'</span></div>'+
-        '<div class="opt"><span>生まれた年：'+escapeHtml(data.birthYear||'-')+'年</span></div>'+
-        '<div class="opt"><span>希望勤務地：'+escapeHtml(data.location||'-')+'</span></div>'+
-        '<div class="opt"><span>メール：'+escapeHtml(data.email||'-')+' ／ 電話：'+escapeHtml(data.tel||'-')+'</span></div>'+
-      '</div>'+
-      '<button class="next-btn">無料相談に申し込む</button>'+
-      '<p class="consent">送信をもって<a href="https://reflame.co.jp/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意したものとみなします。</p>'+
-      '<button class="back-link" type="button">← 1つ前に戻る</button>'
-    );
-    var btn=box.querySelector('.next-btn');
-    btn.onclick=function(){
-      if(btn.disabled) return;
-      btn.disabled=true; btn.textContent='送信中…';
-      setTimeout(complete, 450);
-    };
-    box.querySelector('.back-link').onclick=function(){ nav(4); };
-    scrollToForm();
-  }
+  /* 確認画面（confirmStep）は 2026-10-07 に廃止。旧版は _archive/step_確認画面あり版_2026-10-07/ */
 
   /* 移行期間のみ（SHEET_PARALLEL）。旧スプシの列を崩さないよう、削除した設問のキーは空で送る */
   function sendToSheet(){
@@ -1037,7 +1017,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        ② 旧版は「送信 → /gate の応答を待つ → それから /slots」の直列。送信を押すまで1本も取りに行かない
      ── 対策 ──
        ・先読み: 生まれた年のステップ（#step3）に入った時点で、最初の5日の空き枠を裏で取り始める。
-         残り2画面（連絡先・確認）の入力中に取り終わるので、送信直後はキャッシュから即表示
+         残りの連絡先画面の入力中に取り終わるので、送信直後はキャッシュから即表示（10/7 確認画面廃止で残り1画面に）
        ・/gate と /slots を並列に。gate が担当者を絞ったときだけ取り直す（9/28時点は全ルール pass）
        ・グリッドは表示中の5日だけ取る。次の5日は「›」を押したときに取る
        ・鮮度: 先読み結果は90秒で捨てる。古くても /book でサーバが空きを再検証するので二重予約にはならない
@@ -1084,20 +1064,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   /* ── 表示ページの計算。1画面＝DAYS_PER_VIEW日（2026-09-29 本人指示で7日→5日）。
-     受付期間は今日から WINDOW_DAYS 日（0〜9日目）。10日÷5日＝ちょうど2ページ。期間外は off（押せない・取りに行かない）── */
+     受付期間は今日から WINDOW_DAYS 日（2026-10-07 から14日後まで＝0〜14日目）。土日祝を除くと平日10〜11日＝最大3ページ。── */
   var DAYS_PER_VIEW=5;
   var W=['日','月','火','水','木','金','土'];
   var weekOffset=0, weekSlots={};
-  function maxWeekOffset(){ return Math.ceil(WINDOW_DAYS/DAYS_PER_VIEW)-1; }
-  function weekDates(offset){
+
+  /* ── 2026-10-07 本人指示: 土日祝はカレンダーに出さない ──
+     枠 cc-ad-mk は土日祝に1枠も無い（10/7 API実測）のに灰色の列が並び、「空いていない」ように見えていた。
+     受付期間（今日から WINDOW_DAYS 日）の中から土日祝を除いた日だけを、5日ずつ並べる。最終ページは5日未満のことがある。
+     祝日＝国民の祝日・振替休日・国民の休日（内閣府）。年末年始などの会社休みは入れていない。
+     ⚠ 2027年分までしか入っていない。2028年以降の祝日は灰色の列で出る（見た目だけで予約は壊れない）。毎年末に追記する。
+     ⚠ 担当が土日祝に枠を開けても、ここで消しているので表示されない。開けるならこの表示を戻す。 */
+  var HOLIDAYS={
+    '2026-01-01':1,'2026-01-12':1,'2026-02-11':1,'2026-02-23':1,'2026-03-20':1,'2026-04-29':1,
+    '2026-05-03':1,'2026-05-04':1,'2026-05-05':1,'2026-05-06':1,'2026-07-20':1,'2026-08-11':1,
+    '2026-09-21':1,'2026-09-22':1,'2026-09-23':1,'2026-10-12':1,'2026-11-03':1,'2026-11-23':1,
+    '2027-01-01':1,'2027-01-11':1,'2027-02-11':1,'2027-02-23':1,'2027-03-21':1,'2027-03-22':1,
+    '2027-04-29':1,'2027-05-03':1,'2027-05-04':1,'2027-05-05':1,'2027-07-19':1,'2027-08-11':1,
+    '2027-09-20':1,'2027-09-23':1,'2027-10-11':1,'2027-11-03':1,'2027-11-23':1
+  };
+  function isClosedDay(d){ var w=d.getDay(); return w===0||w===6||!!HOLIDAYS[ymd(d)]; }
+  function openDays(){
     var today=new Date(); today.setHours(0,0,0,0);
     var out=[];
-    for(var i=0;i<DAYS_PER_VIEW;i++){
-      var idx=offset*DAYS_PER_VIEW+i;
-      var d=new Date(today); d.setDate(d.getDate()+idx);
-      out.push({iso:ymd(d), day:d.getDate(), dow:W[d.getDay()], wd:d.getDay(), off:(idx>=WINDOW_DAYS)});
+    /* 最終日は「今日＋WINDOW_DAYS日」まで含める。SFの windowDays=14 は14日後まで予約できる
+       （10/7時点で 10/21 まで空きあり・10/22 から0＝API実測）。旧版は i<WINDOW_DAYS で最終日を1日取りこぼしていた */
+    for(var i=0;i<=WINDOW_DAYS;i++){
+      var d=new Date(today); d.setDate(d.getDate()+i);
+      if(!isClosedDay(d)) out.push(d);
     }
     return out;
+  }
+  function maxWeekOffset(){ return Math.max(0, Math.ceil(openDays().length/DAYS_PER_VIEW)-1); }
+  function weekDates(offset){
+    return openDays().slice(offset*DAYS_PER_VIEW, (offset+1)*DAYS_PER_VIEW).map(function(d){
+      return {iso:ymd(d), day:d.getDate(), dow:W[d.getDay()], wd:d.getDay(), off:false};
+    });
   }
 
   /* ── 先読み（#step3 に入ったら1回だけ）── */
@@ -1114,14 +1116,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     capture(true);
     sendToSheet();
     sendToSlack();
-    pbar.hidden=true;
+    /* 2026-10-07 改善案1: 送信後も進捗バーを残して 5/5 を見せ、✓とお礼は予約完了画面だけにする
+       （旧: バーを消して✓＋「ご回答ありがとうございます！」＝ここで終わったように見えていた） */
+    setProgress(5);
     routing=true; replaceHash('#calendar'); routing=false;
     render(
       '<div class="cal-intro" role="status">'+
-        '<div class="done-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>'+
-        '<p class="ci-thanks">'+escapeHtml(data.lastName||data.name||'')+'さん、ご回答ありがとうございます！</p>'+
-        '<p class="ci-lead">続けて、ご希望の面談日時をお選びください。</p>'+
-        '<p class="ci-note">面談予約は、日時の選択で完了します。</p>'+
+        '<h2 class="q-title">最後に、<span class="hl">面談の日時</span>を選んでください</h2>'+
+        '<p class="ci-note">日時を選んで確定すると、予約が完了します。</p>'+
       '</div>'+
       '<div class="cal-box">'+
         '<div class="cal-hd"><span class="dur">所要時間 60分</span><h3>無料相談の日時を選ぶ</h3></div>'+
@@ -1269,6 +1271,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           fv:(window.__fvKey||'default'), booking_id:(r&&r.bookingId)||''});
       }catch(e){}
       var d=new Date(iso);
+      pbar.hidden=true;   /* 完了画面では進捗バーを消す（✓とお礼で「終わった」を伝える場所はここだけ） */
+      /* 2026-10-07 本人指示: 迷惑メールフォルダの案内を追加（確認メールを開かなかった人は全員欠席・うちiCloud宛が多数＝10/6 OPS診断） */
       render(
         '<div class="done" role="status">'+
           '<div class="done-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>'+
@@ -1276,6 +1280,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           '<p class="booked-dt">'+escapeHtml(jpDate(d)+' '+hhmm(iso)+'〜')+'</p>'+
           '<p>確認メールを <b>'+escapeHtml(data.email||'')+'</b> 宛にお送りしました。<br>'+
           '当日はメールに記載のURLよりご参加ください。</p>'+
+          '<p class="mail-note">メールが見当たらない場合は、<b>迷惑メールフォルダ</b>もご確認ください。</p>'+
         '</div>'
       );
       routing=true; replaceHash('#complete'); routing=false;
@@ -1292,17 +1297,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   /* ══════════════════════════════════════════
-     ハッシュルーター（#step1〜#step5 / #calendar / #complete）
+     ハッシュルーター（#step1〜#step4 / #calendar / #complete）
      2026-09-29 追加（本人指示）: /lp/kensetsu/pro/ と同じ作り。
-       #step1=勤務地 #step2=姓名 #step3=生まれた年 #step4=連絡先 #step5=確認
+       #step1=勤務地 #step2=姓名 #step3=生まれた年 #step4=連絡先（ここで送信）※#step5=確認は2026-10-07に廃止
        #calendar=送信後の日時選択 #complete=予約確定後
      ・ブラウザの「戻る/進む」で前後のステップへ移動でき、入力は data に残るので消えない
      ・未回答のステップへの直リンク/飛び越しは、進める最大のステップへ巻き戻す
      ・送信後はフォームへ戻さない（二重送信・混乱の防止）
      ・各ステップの表示で form_step_view を1回だけ積む（GA4でステップ別の離脱が取れる）
      ⚠ このLPに離脱ポップアップは無いので、pro にある popstate の selfNav 目印は不要。 */
-  var STEPS={1:q3,2:q4,3:q5,4:q6,5:confirmStep};
-  var MAX_STEP=5;
+  var STEPS={1:q3,2:q4,3:q5,4:q6};
+  var MAX_STEP=4;
   var routing=false;
   var lastTracked=0;
 
@@ -1311,7 +1316,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(n===2) return !!data.location;
     if(n===3) return unlocked(2) && !!data.lastName && !!data.firstName;
     if(n===4) return unlocked(3) && !!data.birthYear;
-    if(n===5) return unlocked(4) && !!data.email && !!data.tel;
     return false;
   }
   function maxUnlocked(){
